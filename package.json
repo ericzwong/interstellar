@@ -1,0 +1,13 @@
+{
+    "description": "Intertellar",
+    "repository": "https://registry.npmjs.org/",
+    "README": "README",
+    "devDependencies": {
+        "gulp": "~3.9.0",
+        "gulp-concat": "^2.6.0",
+        "gulp-uglify": "~1.2.0",
+        "gulp-browserify": "~0.5.1",
+        "angular": "~1.4.3"
+    }
+}
+

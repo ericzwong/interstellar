@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh_cn" ng-app='myApp'>
+<head>
+<meta charset='utf-8'/>
+<title></title>
+<script src='../dest/all.js'></script>
+<style>
+	.box {
+		width: 200px;
+		height: 30px;
+		border: 1px solid #cccccc;
+	}
+</style>
+</head>
+
+<body ng-controller='SometingController'>
+	<div ng-controller='ListController'>
+		<ul>
+			<li ng-repeat='item in items | filter:{type: "scenes"}'
+				ng-click='handleClickGotoScenes($index);'>{{ item.content || '新场景' }}</li>
+		</ul>
+		<p>{{prompt}}</p>
+	</div>
+	<div ng-controller='InterstellarController'>
+		<div ng-repeat='item in items' ng-switch on='item.type'>
+			<div ng-switch-when='scenes'>
+				<interstellar-item data-is-focus='{{focusIndex == $index}}'
+									data-ii-index='{{$index}}'>
+				</interstellar-item>
+			</div>
+			<div ng-switch-when='action'>
+				<interstellar-action-item data-is-focus='{{focusIndex == $index}}'
+										  data-ii-index='{{$index}}'>
+				</interstellar-action-item>
+			</div>
+			<div ng-switch-when='figure'>
+				<interstellar-figure-item data-is-focus='{{focusIndex == $index}}'
+										  data-ii-index='{{$index}}'>
+				</interstellar-figure-item>
+			</div>
+			<div ng-switch-when='converse'>
+				<interstellar-converse-item data-is-focus='{{focusIndex == $index}}'
+											data-ii-index='{{$index}}'>
+				</interstellar-converse-item>
+			</div>
+			<div ng-switch-default>
+				<interstellar-behavior-item data-is-focus='{{focusIndex == $index}}'
+											data-ii-index='{{$index}}'>
+				</interstellar-behavior-item>
+			</div>
+		</div>
+		<button ng-click='handleClickSvae();'>保存</button>
+		<p id='total'></p>
+	</div>
+</body>
+</html>

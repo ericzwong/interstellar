@@ -16,7 +16,7 @@ angular.module('myApp', ['helperService', 'Interstellar'])
     if (localStorage.data) {
         interstellarSetProvider.init(JSON.parse(localStorage.data));
     } else {
-        interstellarSetProvider.init([{'type': 'scenes', 'name': '情景', 'content': '  '}]);
+        interstellarSetProvider.init([{'type': 'scenes', 'name': '情景', 'content': ''}]);
     }
 
 })
@@ -66,7 +66,7 @@ $(document).ready(function() {
         //字数统计
         var count = 0;
         jQuery('.box').each(function(index, element){
-            count += jQuery(element).text().length;
+            count += jQuery(element).val().length;
         });
         jQuery('#total').text(count);
     });

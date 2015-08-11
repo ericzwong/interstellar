@@ -3,7 +3,7 @@ var helperService = angular.module('helperService', ['Interstellar']);
 helperService.service('helper', function(interstellarSet) {
     return {
             'gotoBehavior': function(element, index) {
-                if (element.text().trim() !== ''){
+                if (element.val().trim() !== ''){
                     return;
                 }
                 // 需要进行 Behavior 判断

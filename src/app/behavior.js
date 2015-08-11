@@ -2,11 +2,11 @@ module.exports =  function(interstellarSet, helper) {
     return {
         restrict: 'EA',
         replace: true,
-        template: '<div class="box behavior" contenteditable="true">{{item.content}}</div>',
+        template: '<input class="box behavior" ng-model="item.content"/>',
         link: function(scope, element, attributes) {
 
 			if (attributes.isFocus == 'true') {
-				helper.focusNode(element[0]);
+			    element.focus();
 			}
 
 			element.on('keydown', function(event) {
@@ -18,25 +18,25 @@ module.exports =  function(interstellarSet, helper) {
 						interstellarSet.addR(parseInt(attributes.iiIndex, 10) + 1, {
 							'type': 'action',
 							 'name': '动作',
-							 'content': '  '
+							 'content': ''
 						});
 						return scope.$apply();
 					}
 
 					// 如果回车的时候还是空白的
 					//
-					if (element.text().trim() !== ''){
+					if (element.val().trim() !== ''){
 						// 创建一个Figure
 						interstellarSet.replace(attributes.iiIndex, {
 							'type': 'action',
 							'name': '动作',
-							'content': element.text().trim()
+							'content': element.val().trim()
 						});
 						// 创建一个Figure
 						interstellarSet.addR(parseInt(attributes.iiIndex, 10) + 1, {
 							'type': 'figure',
 							'name': '角色',
-                            'content': '  '
+                            'content': ''
 						});
 						scope.$apply();
 
@@ -45,18 +45,18 @@ module.exports =  function(interstellarSet, helper) {
 						interstellarSet.replace(attributes.iiIndex, {
 							'type': 'scenes',
 							'name': '场景',
-							'content': '  '
+							'content': ''
 						});
 						scope.$apply();
 					}
 				} else if (event.keyCode === 8) {
 					// 如果 content 是空的，那么就删除
-					if (element.text().trim() === '') {
+					if (element.val().trim() === '') {
 						event.preventDefault();
 						interstellarSet.remove(parseInt(attributes.iiIndex, 10));
 						// 因为不知道为什么 Angular 的 ng-repeat 在数据删除以后
 						// 并不会重新绘制 interstellarItem 所以需要手动FocusNode
-						helper.focusNode(jQuery('.box')[parseInt(attributes.iiIndex, 10) - 1]);
+						jQuery('.box').eq(parseInt(attributes.iiIndex, 10) - 1).focus();
 						scope.$apply();
 					}
 				}

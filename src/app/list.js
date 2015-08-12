@@ -10,6 +10,6 @@ module.exports = function($scope, interstellarSet, helper) {
 		var gotoElement = jQuery('.scenes').eq(index);
 
 		jQuery(window).scrollTop(gotoElement.offset().top);
-		helper.focusNode(gotoElement[0]);
+		gotoElement.focus();
 	};
 };

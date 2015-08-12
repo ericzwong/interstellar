@@ -5,23 +5,110 @@
 <title></title>
 <script src='../dest/all.js'></script>
 <style>
-	.box {
-		width: 200px;
-		height: 30px;
-		border: 1px solid #cccccc;
+
+	* {
+		margin: 0;
+		padding: 0;
 	}
+
+	html {
+		display: flex;
+		height: 100%;
+	}
+
+	.box {
+		width: 70%;
+		padding: 10px 5px;
+		border: none;
+		border-bottom: 1px solid #ededee;
+		outline: none;
+		font-size: 15px;
+		box-sizing: border-box;
+	}
+
+	.scenes {
+		background-color: #c0c0c0;
+	}
+
+	.figure {
+		padding-left: 30%;
+		font-weight: bold;
+	}
+
+	.converse {
+		padding-left: 20%;
+		font-size: 13px;
+	}
+
+	.wz-main {
+		display: flex;
+		flex: 1;
+	}
+
+	.wz-list {
+		flex: 1;
+		position: relative;
+		background-color: #f6f6f6;
+	}
+
+	.wz-list ul li {
+		background-color: #cde4e9;
+		text-align: center;
+		padding: 5px 0px;
+	}
+
+	.wz-list ul {
+		width: 100%;
+		cursor: pointer;
+	}
+
+	.wz-container {
+		flex: 2;
+		padding-left: 150px;
+	}
+
+	.prompt {
+		position: absolute;
+		right: 0;
+		top: 0;
+		background-color: #5c5855;
+		color: #ffffff;
+		padding: 5px 20px;
+		margin-top: 30%;
+		margin-right: -60px;
+	}
+
+	#total {
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		margin-left: 20px;
+		margin-bottom: 20px;
+	}
+
+	.wz-save-button {
+		position: absolute;
+		bottom: 0;
+		margin-bottom: 20px;
+		background-color: #4a8cf7;
+		padding: 10px 30px;
+		border: none;
+		color: #ffffff;
+		cursor: pointer;
+	}
+
 </style>
 </head>
 
-<body ng-controller='SometingController'>
-	<div ng-controller='ListController'>
+<body ng-controller='SometingController' class='wz-main'>
+	<div ng-controller='ListController' class='wz-list'>
 		<ul>
 			<li ng-repeat='item in items | filter:{type: "scenes"}'
 				ng-click='handleClickGotoScenes($index);'>{{ item.content || '新场景' }}</li>
 		</ul>
-		<p>{{prompt}}</p>
+		<p class='prompt'>{{prompt}}</p>
 	</div>
-	<div ng-controller='InterstellarController'>
+	<div ng-controller='InterstellarController' class='wz-container'>
 		<div ng-repeat='item in items' ng-switch on='item.type'>
 			<div ng-switch-when='scenes'>
 				<interstellar-item data-is-focus='{{focusIndex == $index}}'
@@ -49,7 +136,7 @@
 				</interstellar-behavior-item>
 			</div>
 		</div>
-		<button ng-click='handleClickSvae();'>保存</button>
+		<button ng-click='handleClickSvae();' class='wz-save-button'>保存</button>
 		<p id='total'></p>
 	</div>
 </body>
